@@ -1,0 +1,25 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+
+
+# The primary network interface
+#-- for Physical Interface
+auto p1p1
+iface p1p1 inet manual
+ up ip address add 0/0 dev $IFACE
+ up ip link set $IFACE up
+ down ip link set $IFACE down
+
+#-- for Virtual Interface(OVS)
+auto br-ex
+iface br-ex inet static
+ address 192.168.0.200
+ netmask 255.255.255.0
+ network 192.168.0.0
+ gateway 192.168.0.254
+ dns-nameservers 218.176.253.97
